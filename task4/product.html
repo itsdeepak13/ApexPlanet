@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Product Listing</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background: #f5f7fa;
+        }
+        
+        header {
+            background: #1e88e5;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1rem;
+        }
+        
+        .filters {
+            width: 260px;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-right: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+        
+        .filters h2 {
+            margin-top: 0;
+        }
+        
+        .filters label {
+            font-weight: bold;
+            margin-top: 1rem;
+            display: block;
+        }
+        
+        .filters select,
+        .filters input[type="range"] {
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding: 6px;
+        }
+        
+        .product-list {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-info h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .price {
+            color: #1e88e5;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .rating {
+            margin-top: 5px;
+            color: #fbc02d;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .filters {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>Smart Product Gallery</header>
+
+    <div class="container">
+        <aside class="filters">
+            <h2>Filters</h2>
+            <label for="categoryFilter">Category</label>
+            <select id="categoryFilter">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+        <option value="home">Home</option>
+        <option value="sports">Sports</option>
+      </select>
+
+            <label for="priceFilter">Max Price</label>
+            <input type="range" id="priceFilter" min="0" max="1000" step="50">
+            <span id="priceValue">Up to $1000</span>
+
+            <h2>Sort By</h2>
+            <select id="sortBy">
+        <option value="default">Default</option>
+        <option value="priceLowHigh">Price: Low to High</option>
+        <option value="priceHighLow">Price: High to Low</option>
+        <option value="ratingHighLow">Rating: High to Low</option>
+      </select>
+        </aside>
+
+        <main class="product-list" id="productList">
+            <!-- Products will be displayed by JS -->
+        </main>
+    </div>
+
+    <script>
+        const products = [{
+            id: 1,
+            name: "iPhone 14",
+            price: 899,
+            rating: 4.8,
+            category: "electronics",
+            image: "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6487/6487386_sd.jpg"
+        }, {
+            id: 2,
+            name: "Nike Running Shoes",
+            price: 120,
+            rating: 4.5,
+            category: "fashion",
+            image: "https://tse4.mm.bing.net/th/id/OIP.Yi12XLxOgMVFDDvaTTo18wHaFB?cb=iwc2&rs=1&pid=ImgDetMain"
+        }, {
+            id: 3,
+            name: "Bluetooth Speaker",
+            price: 60,
+            rating: 4.3,
+            category: "electronics",
+            image: "https://tse1.mm.bing.net/th/id/OIP.g-IXaRH2deMRDkasq9BDFQHaHa?cb=iwc2&rs=1&pid=ImgDetMain"
+        }, {
+            id: 4,
+            name: "Modern Sofa",
+            price: 750,
+            rating: 4.6,
+            category: "home",
+            image: "https://cdn.shopify.com/s/files/1/0683/7338/1440/files/pasted_20image_200-92-min_aac92445-064e-40b2-bcb0-25a9c91b74ea.png?v=1681461727"
+        }, {
+            id: 5,
+            name: "Wrist Watch",
+            price: 180,
+            rating: 4.1,
+            category: "fashion",
+            image: "https://m.media-amazon.com/images/I/61PJcc2WWlL._UL1500_.jpg"
+        }, {
+            id: 6,
+            name: "LED TV 55-inch",
+            price: 499,
+            rating: 4.7,
+            category: "electronics",
+            image: "https://tse1.mm.bing.net/th/id/OIP.QYv_SMHw0HxGN9xzMmk9uAHaGf?cb=iwc2&rs=1&pid=ImgDetMain"
+        }, {
+            id: 7,
+            name: "Gaming Chair",
+            price: 260,
+            rating: 4.4,
+            category: "home",
+            image: "https://tse3.mm.bing.net/th/id/OIP.fy52uD9b7hs8UWhkhlV3uwHaHa?cb=iwc2&rs=1&pid=ImgDetMain"
+        }, {
+            id: 8,
+            name: "Football",
+            price: 40,
+            rating: 4.0,
+            category: "sports",
+            image: "https://tse4.mm.bing.net/th/id/OIP.j4l_-kY9lJd5eCce2_SICwHaE8?cb=iwc2&rs=1&pid=ImgDetMain"
+        }, {
+            id: 9,
+            name: "Wireless Headphones",
+            price: 150,
+            rating: 4.6,
+            category: "electronics",
+            image: "https://tse2.mm.bing.net/th/id/OIP.-J7fq6u9Zm3dJwixcxOVTgHaG-?cb=iwc2&rs=1&pid=ImgDetMain"
+        }, {
+            id: 10,
+            name: "Treadmill",
+            price: 850,
+            rating: 4.7,
+            category: "sports",
+            image: "https://tse2.mm.bing.net/th/id/OIP.t_vbLahmoW_rLh4wZQ7TsAAAAA?cb=iwc2&rs=1&pid=ImgDetMain"
+        }];
+
+        const productList = document.getElementById("productList");
+        const categoryFilter = document.getElementById("categoryFilter");
+        const priceFilter = document.getElementById("priceFilter");
+        const sortBy = document.getElementById("sortBy");
+        const priceValue = document.getElementById("priceValue");
+
+        function displayProducts(productArray) {
+            productList.innerHTML = "";
+            productArray.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <div class="price">$${product.price}</div>
+            <div class="rating">⭐ ${product.rating}</div>
+          </div>
+        `;
+                productList.appendChild(card);
+            });
+        }
+
+        function filterAndSort() {
+            let filtered = [...products];
+            const selectedCategory = categoryFilter.value;
+            const selectedPrice = parseInt(priceFilter.value);
+            const sortOption = sortBy.value;
+
+            priceValue.textContent = `Up to $${selectedPrice}`;
+
+            if (selectedCategory !== "all") {
+                filtered = filtered.filter(p => p.category === selectedCategory);
+            }
+            filtered = filtered.filter(p => p.price <= selectedPrice);
+
+            if (sortOption === "priceLowHigh") {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortOption === "priceHighLow") {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (sortOption === "ratingHighLow") {
+                filtered.sort((a, b) => b.rating - a.rating);
+            }
+
+            displayProducts(filtered);
+        }
+
+        // Initial Load
+        priceFilter.value = 1000;
+        filterAndSort();
+
+        // Event Listeners
+        categoryFilter.addEventListener("change", filterAndSort);
+        priceFilter.addEventListener("input", filterAndSort);
+        sortBy.addEventListener("change", filterAndSort);
+    </script>
+</body>
+
+</html>

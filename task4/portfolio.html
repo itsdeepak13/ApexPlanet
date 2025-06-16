@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rashid Khan | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #fdfdfd;
+            color: #333;
+        }
+        
+        header {
+            background: #111;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        header h1 {
+            font-size: 24px;
+        }
+        
+        nav a {
+            color: white;
+            margin: 0 12px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        nav a:hover {
+            color: #00e0ff;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #00e0ff, #0077b6);
+            color: white;
+        }
+        
+        .hero h2 {
+            font-size: 36px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+        }
+        
+        section {
+            padding: 60px 40px;
+            max-width: 900px;
+            margin: auto;
+        }
+        
+        h2.section-title {
+            border-left: 6px solid #0077b6;
+            padding-left: 12px;
+            margin-bottom: 30px;
+            color: #0077b6;
+        }
+        
+        .skills span,
+        .experience,
+        .education {
+            display: block;
+            margin: 10px 0;
+        }
+        
+        .card {
+            padding: 20px;
+            background: #f5faff;
+            border-left: 5px solid #0077b6;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        
+        .contact-form button {
+            background: #0077b6;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        footer {
+            text-align: center;
+            background: #eee;
+            padding: 20px;
+            font-size: 14px;
+        }
+        
+        .social-links a {
+            text-decoration: none;
+            color: #0077b6;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Rashid Khan</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h2>Hello, I'm Rashid 👋</h2>
+        <p>ECE Student @ IIIT Manipur | C++ Developer | Web Developer</p>
+    </div>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <p>I am an Electronics and Communication Engineering student at IIIT Manipur. I'm passionate about software development, system design, and problem-solving. I enjoy building efficient systems using C++, data structures, and Verilog for digital hardware
+            design.
+        </p>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills">
+            <span>✅ C, C++</span>
+            <span>✅ Data Structures & Algorithms</span>
+            <span>✅ Operating Systems</span>
+            <span>✅ Object-Oriented Programming (OOP)</span>
+            <span>✅ JavaScript, HTML, CSS</span>
+            <span>✅ Verilog, VLSI Design</span>
+            <span>✅ SQL, MySQL, SQLite</span>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="card experience">
+            <h3>Winter Internship - IIIT Allahabad</h3>
+            <p>January 2024</p>
+            <p>Worked on Verilog-based digital systems and FPGA simulation. Focused on optimizing VLSI design flows and improving circuit reliability under practical conditions.</p>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="card education">
+            <h3>IIIT Manipur</h3>
+            <p>B.Tech in Electronics and Communication Engineering</p>
+            <p>2022 – 2026 | CGPA: 7.97</p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="card">
+            <h3>🔐 Mixed PUF using Verilog</h3>
+            <p>Designed a Physical Unclonable Function using Verilog for secure identification with simulation testing.</p>
+        </div>
+        <div class="card">
+            <h3>🗳️ Simple Voting Machine (Verilog)</h3>
+            <p>Built a basic voting system with vote casting/validation logic implemented via Verilog simulations.</p>
+        </div>
+        <div class="card">
+            <h3>📚 Student Management System (C++ + SQL)</h3>
+            <p>Developed a C++-based application connected to an SQL database for managing student records with search/sort functionality.</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <form class="contact-form" onsubmit="submitForm(event)">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="msg" style="color: green; font-weight: bold;"></p>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="mailto:rkepsss5@iiitmanipur.ac.in">Email</a> |
+            <a href="https://linkedin.com/in/rashid-khan-33ba56249" target="_blank">LinkedIn</a>
+        </div>
+        <p>© 2025 Rashid Khan. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function submitForm(e) {
+            e.preventDefault();
+            document.getElementById("msg").textContent = "Thank you! Your message has been sent ✅";
+        }
+    </script>
+
+</body>
+
+</html>
